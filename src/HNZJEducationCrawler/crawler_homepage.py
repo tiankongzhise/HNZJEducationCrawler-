@@ -25,8 +25,12 @@ class HomePageCrawler(ZjCrawler):
                         classification_info.extend(paired_info)
         return classification_info
 
-    def __call__(self):
-        raw_data = self.fetch_data(self.host)
+    def run(self,url:str|None = None):
+        if url:
+            raw_data = self.fetch_data(url)
+        else:
+            raw_data = self.fetch_data(self.host)
         classification_info = self.parse_data(raw_data)
         colums = ['查询', '学校类型', 'URL']
-        self.save_to_csv(classification_info,colums)
+        result = self.save_to_csv(classification_info,colums)
+        return result

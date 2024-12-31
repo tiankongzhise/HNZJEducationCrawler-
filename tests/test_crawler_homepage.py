@@ -3,5 +3,8 @@ import unittest
 
 
 class TestHomePageCrawler(unittest.TestCase):
-    def setUp(self) -> None:
-        self.crawler = HomePageCrawler()
+
+    def test_call(self):
+        crawler = HomePageCrawler()
+        result = crawler.run()
+        self.assertIsNone(result)

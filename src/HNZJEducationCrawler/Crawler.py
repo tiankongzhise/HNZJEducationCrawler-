@@ -31,9 +31,16 @@ class ZjCrawler(object):
             df = pd.DataFrame(data)
             if filename is None:
                 filename = self.__class__.__name__ + '.csv'
-            if columns is not None:
+            if columns is  None:
                 df.to_csv(filename, index=False)
             else:
                 df.to_csv(filename, index=False, header=columns)
+            result = None
         except Exception as e:
-            raise f"Error saving data to CSV: {e}"
+            result = f"Error saving data to CSV: {e}"
+            raise result
+        finally:
+            return result
+
+    def run(self):
+        raise NotImplementedError("run method must be implemented in subclass")
